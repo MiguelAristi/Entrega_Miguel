@@ -1,0 +1,42 @@
+{% extends 'Base/home.html' %}
+
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+
+<p><h4>{{suv.titulo}}</h4></p>
+{% if suv.imagenInstrumento %}
+    <p><img src="{{suv.imagenInstrumento.url}}" alt=""></p>
+{% endif %}
+<p>Marca: {{suv.marca}}</p>
+<p>Modelo: {{suv.modelo}}</p>
+<p>Descripción: {{suv.descripcion}}</p>
+<p>Año: {{suv.year}}</p>
+<p>Precio(US$): {{suv.precio}}</p>
+<p>Teléfono de Contacto: {{suv.telefonoContacto}}</p>
+<p>Email de Contacto: {{suv.emailContacto}}</p>
+
+</div>
+<br>
+<div class="container">
+    <h4>Comentarios...</h4>
+    <br>
+    <div class="container">
+    {% if not suv.comentarios.all %}
+        No han comentado este instrumento
+    {% else %}
+        {% for comentario in suv.comentarios.all %}
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.mensaje}}</p>
+        <p><small>{{comentario.fechaComentario}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'comentario' suv.pk %}">Agrega un Comentario</a>
+    </div>
+</div>
+<br>
+{% endblock %}

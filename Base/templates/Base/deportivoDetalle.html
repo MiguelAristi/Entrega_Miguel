@@ -1,0 +1,42 @@
+{% extends 'Base/home.html' %}
+
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+
+<p><h4>{{deportivo.titulo}}</h4></p>
+{% if deportivo.imagenInstrumento %}
+    <p><img src="{{deportivo.imagenInstrumento.url}}" alt=""></p>
+{% endif %}
+<p>Marca: {{deportivo.marca}}</p>
+<p>Modelo: {{deportivo.modelo}}</p>
+<p>Descripción: {{deportivo.descripcion}}</p>
+<p>Año: {{deportivo.year}}</p>
+<p>Precio(US$): {{deportivo.precio}}</p>
+<p>Teléfono de Contacto: {{deportivo.telefonoContacto}}</p>
+<p>Email de Contacto: {{deportivo.emailContacto}}</p>
+
+</div>
+<br>
+<div class="container">
+    <h4>Comentarios...</h4>
+    <br>
+    <div class="container">
+    {% if not deportivo.comentarios.all %}
+        No han comentado este vehiculo
+    {% else %}
+        {% for comentario in deportivo.comentarios.all %}
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.mensaje}}</p>
+        <p><small>{{comentario.fechaComentario}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'comentario' deportivo.pk %}">Agrega un Comentario</a>
+    </div>
+</div>
+<br>
+{% endblock %}

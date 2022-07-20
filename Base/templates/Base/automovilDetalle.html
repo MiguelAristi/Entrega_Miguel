@@ -1,0 +1,43 @@
+{% extends 'Base/home.html' %}
+
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+
+<p><h4>{{automovil.titulo}}</h4></p>
+
+{% if automovil.imagenInstrumento %}
+    <p><img src="{{automovil.imagenInstrumento.url}}" alt=""></p>
+{% endif %}
+<p>Marca: {{automovil.marca}}</p>
+<p>Modelo: {{automovil.modelo}}</p>
+<p>Descripción: {{automovil.descripcion}}</p>
+<p>Año: {{automovil.year}}</p>
+<p>Precio(US$): {{automovil.precio}}</p>
+<p>Teléfono de Contacto: {{automovil.telefonoContacto}}</p>
+<p>Email de Contacto: {{automovil.emailContacto}}</p>
+
+</div>
+<br>
+<div class="container">
+    <h4>Comentarios...</h4>
+    <br>
+    <div class="container">
+    {% if not automovil.comentarios.all %}
+        No han comentado este vehiculo
+    {% else %}
+        {% for comentario in automovil.comentarios.all %}
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.mensaje}}</p>
+        <p><small>{{comentario.fechaComentario}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'comentario' automovil.pk %}">Agrega un Comentario</a>
+    </div>
+</div>
+<br>
+{% endblock %}

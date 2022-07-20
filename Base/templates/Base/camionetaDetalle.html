@@ -1,0 +1,42 @@
+{% extends 'Base/home.html' %}
+
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+
+<p><h4>{{camioneta.titulo}}</h4></p>
+{% if camioneta.imagenInstrumento %}
+    <p><img src="{{camioneta.imagenInstrumento.url}}" alt=""></p>
+{% endif %}
+<p>Marca: {{camioneta.marca}}</p>
+<p>Modelo: {{camioneta.modelo}}</p>
+<p>Descripción: {{camioneta.descripcion}}</p>
+<p>Año: {{camioneta.year}}</p>
+<p>Precio(US$): {{camioneta.precio}}</p>
+<p>Teléfono de Contacto: {{camioneta.telefonoContacto}}</p>
+<p>Email de Contacto: {{camioneta.emailContacto}}</p>
+
+</div>
+<br>
+<div class="container">
+    <h4>Comentarios...</h4>
+    <br>
+    <div class="container">
+    {% if not camioneta.comentarios.all %}
+        No han comentado este vehiculo
+    {% else %}
+        {% for comentario in camioneta.comentarios.all %}
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.mensaje}}</p>
+        <p><small>{{comentario.fechaComentario}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'comentario' camioneta.pk %}">Agrega un Comentario</a>
+    </div>
+</div>
+
+{% endblock %}

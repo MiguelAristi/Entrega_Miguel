@@ -1,0 +1,43 @@
+{% extends 'Base/home.html' %}
+
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+
+
+<p><h4>{{bicicleta.titulo}}</h4></p>
+{% if bicicleta.imagenInstrumento %}
+    <p><img src="{{bicicleta.imagenInstrumento.url}}" alt=""></p>
+{% endif %}
+<p>Marca: {{bicicleta.marca}}</p>
+<p>Modelo: {{bicicleta.modelo}}</p>
+<p>Descripción: {{bicicleta.descripcion}}</p>
+<p>Año: {{bicicleta.year}}</p>
+<p>Precio(US$): {{bicicleta.precio}}</p>
+<p>Teléfono de Contacto: {{bicicleta.telefonoContacto}}</p>
+<p>Email de Contacto: {{bicicleta.emailContacto}}</p>
+
+</div>
+<br>
+<div class="container">
+    <h4>Comentarios...</h4>
+    <br>
+    <div class="container">
+    {% if not bicicleta.comentarios.all %}
+        No han comentado este vehiculo
+    {% else %}
+        {% for comentario in bicicleta.comentarios.all %}
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.mensaje}}</p>
+        <p><small>{{comentario.fechaComentario}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'comentario' bicicleta.pk %}">Agrega un Comentario</a>
+    </div>
+</div>
+<br>
+{% endblock %}
