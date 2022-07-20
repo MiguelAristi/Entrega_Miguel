@@ -51,7 +51,7 @@ python manage.py runserver
 
 ## Video Demostración
 
-link del video
+https://youtu.be/2tTvpx66LTU
 
 
 
